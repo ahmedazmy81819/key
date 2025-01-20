@@ -92,10 +92,44 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* تأثير الألوان الدائرية */
+.key::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    opacity: 0;
+    transition: width 0.2s, height 0.2s, opacity 0.2s;
+}
+
+/* تفعيل التأثير الدائري */
+.key.active::after {
+    width: 150px;
+    height: 150px;
+    opacity: 1;
+}
+
+/* تأثير أبيض للحروف */
+.key.color-effect {
+    background-color: #fff;
+    color: #000;
+    transition: background-color 0.2s, color 0.2s;
+}
+
 /* زر المسح */
 .backspace {
     background-color: #ff5555;
     flex: 2;
+}
+
+/* تأثير المسح */
+.backspace:active {
+    background-color: #ff3333;
 }
 
 /* ألوان التلميحات */
