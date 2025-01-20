@@ -88,6 +88,71 @@ function handleKeyPress(key) {
             break;
         }
     }
+
+    // تفعيل تأثير الضغط على الزر
+    const keyElement = document.querySelector(`.key[data-key='${key}']`);
+    keyElement.classList.add('active');
+
+    // تفعيل تأثير الألوان الدائرية
+    const layers = getLayers(keyElement);
+    let totalDelay = 0;
+
+    layers.forEach((layer, layerIndex) => {
+        layer.forEach((k, keyIndex) => {
+            setTimeout(() => {
+                k.classList.add('color-effect');
+            }, (layerIndex * 50) + (keyIndex * 10)); // تأخير بين الطبقات والحروف
+        });
+
+        // حساب المدة الكلية للتأثير
+        totalDelay = (layerIndex * 50) + (layer.length * 10);
+    });
+
+    // إزالة التأثيرات بعد انتهاء الانتشار
+    setTimeout(() => {
+        keyElement.classList.remove('active');
+        layers.forEach(layer => {
+            layer.forEach(k => {
+                k.classList.remove('color-effect');
+            });
+        });
+    }, totalDelay);
+}
+
+// دالة للحصول على الطبقات الدائرية
+function getLayers(startKey) {
+    const keyboard = document.getElementById('keyboard');
+    const keysArray = Array.from(keyboard.querySelectorAll('.key'));
+    const startIndex = keysArray.indexOf(startKey);
+    const layers = [];
+
+    // إحداثيات الحروف في الـ grid
+    const gridSize = 10; // عدد الأعمدة
+    const rows = Math.ceil(keysArray.length / gridSize);
+
+    // تحويل الفهرس إلى إحداثيات (x, y)
+    const startX = startIndex % gridSize;
+    const startY = Math.floor(startIndex / gridSize);
+
+    // تحديد الطبقات الدائرية
+    for (let radius = 1; radius <= Math.max(gridSize, rows); radius++) {
+        const layer = [];
+        for (let x = startX - radius; x <= startX + radius; x++) {
+            for (let y = startY - radius; y <= startY + radius; y++) {
+                if (Math.abs(x - startX) === radius || Math.abs(y - startY) === radius) {
+                    const index = y * gridSize + x;
+                    if (index >= 0 && index < keysArray.length) {
+                        layer.push(keysArray[index]);
+                    }
+                }
+            }
+        }
+        if (layer.length > 0) {
+            layers.push(layer);
+        }
+    }
+
+    return layers;
 }
 
 // مسح آخر حرف
