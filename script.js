@@ -21,6 +21,11 @@ const resultMessage = document.getElementById('result-message');
 const nextButton = document.getElementById('next-button');
 const homeButton = document.getElementById('home-button');
 
+// مؤثرات صوتية
+const keyPressSound = new Audio('key-press.mp3'); // صوت عند الضغط على الزر
+const winSound = new Audio('win.mp3'); // صوت عند الفوز
+const loseSound = new Audio('lose.mp3'); // صوت عند الخسارة
+
 // اختيار كلمة عشوائية
 function getRandomWord() {
     const availableWords = words.filter(word => !usedWords.includes(word));
@@ -78,6 +83,8 @@ function createKeyboard() {
 
 // التعامل مع الضغط على الحروف
 function handleKeyPress(key) {
+    keyPressSound.play(); // تشغيل صوت الضغط على الزر
+
     const cells = document.querySelectorAll('.cell');
     const startIndex = currentAttempt * wordLength;
     const endIndex = startIndex + wordLength;
@@ -195,10 +202,12 @@ function checkWord() {
 
         if (guessedWord === secretWord) {
             showResult("مبروك! انت فزت!", "#6aaa64");
+            winSound.play(); // تشغيل صوت الفوز
         } else {
             currentAttempt++;
             if (currentAttempt === attempts) {
                 showResult(`للأسف! الكلمة الصحيحة كانت: ${secretWord}`, "#ff4d4d");
+                loseSound.play(); // تشغيل صوت الخسارة
             }
         }
     }
@@ -224,6 +233,19 @@ function resetGame() {
 function goHome() {
     window.location.href = "index.html"; // يمكنك تغيير هذا ليناسب الصفحة الرئيسية
 }
+
+// التعامل مع أحداث لوحة المفاتيح
+document.addEventListener('keydown', (event) => {
+    const key = event.key;
+
+    if (key === 'Backspace') {
+        deleteLastLetter();
+    } else if (key === 'Enter') {
+        checkWord();
+    } else if (/^[\u0600-\u06FF]$/.test(key)) { // التحقق من أن المفتاح حرف عربي
+        handleKeyPress(key);
+    }
+});
 
 // بدء اللعبة
 createGrid();
