@@ -30,8 +30,10 @@ const loseSound = new Audio('lose.mp3'); // صوت عند الخسارة
 function getRandomWord() {
     const availableWords = words.filter(word => !usedWords.includes(word));
     if (availableWords.length === 0) {
-        alert("لقد لعبت كل الكلمات!");
-        return words[0]; // إرجاع كلمة افتراضية إذا انتهت الكلمات
+        // إعادة تعيين القائمة إذا انتهت الكلمات
+        usedWords = [];
+        localStorage.setItem('usedWords', JSON.stringify(usedWords));
+        return words[Math.floor(Math.random() * words.length)]; // اختيار كلمة عشوائية جديدة
     }
     const randomWord = availableWords[Math.floor(Math.random() * availableWords.length)];
     usedWords.push(randomWord);
