@@ -104,13 +104,13 @@ body {
     transform: translate(-50%, -50%);
     border-radius: 50%;
     opacity: 0;
-    transition: width 0.2s, height 0.2s, opacity 0.2s;
+    transition: width 0.3s ease-out, height 0.3s ease-out, opacity 0.3s ease-out;
 }
 
 /* تفعيل التأثير الدائري */
 .key.active::after {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     opacity: 1;
 }
 
