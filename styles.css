@@ -1,55 +1,168 @@
 body {
-    font-family: 'Tajawal', Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
     text-align: center;
-    padding: 20px;
+    background-color: #f4f4f4;
+    direction: rtl;
     margin: 0;
+    padding: 0;
 }
 
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: #fff;
+.game-container {
+    margin-top: 50px;
+}
+
+#word-grid {
+    display: grid;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.cell {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #fff;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.cell.correct {
+    background-color: #6aaa64;
+    color: white;
+}
+
+.cell.present {
+    background-color: #c9b458;
+    color: white;
+}
+
+.cell.absent {
+    background-color: #787c7e;
+    color: white;
+}
+
+/* تصميم الكيبورد الجديد */
+#keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    background-color: #444;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: perspective(1000px) rotateX(10deg);
+    margin-top: 20px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* صفوف الكيبورد */
+.row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* أزرار الكيبورد */
+.key {
+    padding: 15px;
+    font-size: 18px;
+    text-align: center;
+    background-color: #555;
+    border: 1px solid #666;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.1s, box-shadow 0.1s;
+    flex: 1;
+}
+
+/* تأثير الضغط على الزر */
+.key:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* زر المسح */
+.backspace {
+    background-color: #ff5555;
+    flex: 2;
+}
+
+/* ألوان التلميحات */
+.key.correct {
+    background-color: #6aaa64;
+    color: white;
+}
+
+.key.present {
+    background-color: #c9b458;
+    color: white;
+}
+
+.key.absent {
+    background-color: #787c7e;
+    color: white;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+    animation: pop 0.5s ease-in-out;
+}
+
+@keyframes pop {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #6aaa64;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #5a995a;
+}
+
+#result-screen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
-textarea {
-    width: 100%;
-    height: 100px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    resize: vertical;
+#result-screen.hidden {
+    display: none;
 }
 
-.controls {
+#result-screen h2 {
     margin-bottom: 20px;
 }
 
-.controls label {
-    display: block;
-    margin: 10px 0 5px;
-}
-
-.controls input[type="range"],
-.controls input[type="color"],
-.controls select,
-.controls button,
-.controls input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-#canvas-container {
-    margin-top: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+#result-screen button {
+    margin: 5px;
 }
