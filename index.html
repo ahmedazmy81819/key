@@ -1,58 +1,27 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقع متطور مثل zty.pe</title>
+    <title>لعبة تخمين الكلمات</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>موقع متطور مثل zty.pe</h1>
-        <textarea id="inputText" placeholder="اكتب نصك هنا..."></textarea>
-        <div class="controls">
-            <label for="fontSize">حجم الخط:</label>
-            <input type="range" id="fontSize" min="10" max="100" value="30">
-            <label for="rotation">تدوير النص:</label>
-            <input type="range" id="rotation" min="0" max="360" value="0">
-            <label for="textColor">لون النص:</label>
-            <input type="color" id="textColor" value="#000000">
-            <label for="bgColor">لون الخلفية:</label>
-            <input type="color" id="bgColor" value="#ffffff">
-            <label for="shadowColor">لون الظل:</label>
-            <input type="color" id="shadowColor" value="#000000">
-            <label for="shadowBlur">وضوح الظل:</label>
-            <input type="range" id="shadowBlur" min="0" max="20" value="0">
-            <label for="letterSpacing">تباعد الأحرف:</label>
-            <input type="range" id="letterSpacing" min="0" max="20" value="0">
-            <label for="textAlign">محاذاة النص:</label>
-            <select id="textAlign">
-                <option value="right">يمين</option>
-                <option value="center">وسط</option>
-                <option value="left">يسار</option>
-            </select>
-            <label for="fontFamily">نوع الخط:</label>
-            <select id="fontFamily">
-                <option value="Tajawal">Tajawal</option>
-                <option value="Arial">Arial</option>
-                <option value="Courier New">Courier New</option>
-            </select>
-            <label for="bgImage">تحميل خلفية:</label>
-            <input type="file" id="bgImage" accept="image/*">
-            <button onclick="addShape('circle')">إضافة دائرة</button>
-            <button onclick="addShape('rect')">إضافة مستطيل</button>
-            <button onclick="updateText()">عرض النص</button>
-            <button onclick="downloadAsImage()">حفظ كصورة</button>
-            <button onclick="downloadAsPDF()">حفظ كـ PDF</button>
-        </div>
-        <div id="canvas-container">
-            <canvas id="canvas"></canvas>
-        </div>
+    <div class="game-container">
+        <h1>لعبة تخمين الكلمات</h1>
+        <div id="word-grid"></div>
+        <div id="keyboard"></div>
+        <p id="message"></p>
+        <button id="check-button">تحقق</button>
     </div>
+
+    <!-- شاشة الفوز/الخسارة -->
+    <div id="result-screen" class="hidden">
+        <h2 id="result-message"></h2>
+        <button id="next-button">التالي</button>
+        <button id="home-button">العودة للصفحة الرئيسية</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
